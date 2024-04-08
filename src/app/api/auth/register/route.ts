@@ -1,12 +1,22 @@
-import { NextResponse } from "next/server";
+import { NextResponse } from 'next/server';
+import { hash } from 'bcrypt';
+import { sql } from '@vercel/postgres';
 
-export async function POST(request: Request){
-    try{
-        const {email, password} = await request.json();
-        //TODO validation email and password
-        console.log({email,password})
-    } catch(e){
-        console.log({e})
-    }
-    return NextResponse.json({message: "success"})
+export async function POST(request: Request) {
+  try {
+    const { email, name, surname, studentgroup, password } = await request.json();
+    // validate email and password
+    console.log({ email, name, surname, studentgroup, password });
+
+    const hashedPassword = await hash(password, 10);
+
+    const response = await sql`
+      INSERT INTO users (email, name, surname, studentgroup, password)
+      VALUES (${email}, ${name}, ${surname}, ${studentgroup}, ${hashedPassword})
+    `;
+  } catch (e) {
+    console.log({ e });
+  }
+
+  return NextResponse.json({ message: 'success' });
 }
