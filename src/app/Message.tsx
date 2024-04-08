@@ -4,7 +4,7 @@ import React from 'react';
 const Message = (props:any) => {
     if (props.isLogged){
         return(
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <div style={{display: 'flex', justifyContent: 'center'}} className="text-black z-10 max-w-5xl w-full items-center justify-between font-mono font-bold text-lg lg:flex">
             <p>
                 Logged in as {props.name}
             </p>
@@ -13,7 +13,7 @@ const Message = (props:any) => {
     }
     else{
     return(
-        <div className="z-10 max-w-5xl w-full items-center justify-between font-mono text-sm lg:flex">
+        <div style={{display: 'flex', justifyContent: 'center'}} className="text-black z-10 max-w-5xl w-full items-center justify-between font-mono font-bold text-lg lg:flex">
             <p>
             Not logged in
             </p>
