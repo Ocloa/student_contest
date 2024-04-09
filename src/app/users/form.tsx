@@ -1,5 +1,5 @@
 import React from 'react';
-import {fetchUsers} from '@/app/api/users/route'
+import {GET} from '@/app/api/users/route'
 
 type UserData = {
     id: number;
@@ -26,7 +26,7 @@ export default async function Form(){
         border: '1px solid #252422',
       };
 
-    const rows = await fetchUsers();
+    const rows = await GET();
     //@ts-ignore
     const data: UserData[] = rows.map((row: QueryResultRow) =>({
             id: row.id,

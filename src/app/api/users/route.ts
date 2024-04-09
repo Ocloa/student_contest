@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { sql } from '@vercel/postgres';
 
-export async function fetchUsers() {
+export async function GET() {
   try {
     const data = await sql`
       SELECT * FROM users
