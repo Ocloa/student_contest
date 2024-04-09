@@ -1,5 +1,4 @@
 import React from 'react';
-import {GET} from '@/app/api/users/route'
 
 type UserData = {
     id: number;
@@ -7,9 +6,6 @@ type UserData = {
     surname: string;
     group: string;
   };
-type Props = {
-   users : UserData[];
-};
 
 
 export default async function Form(){
@@ -26,7 +22,9 @@ export default async function Form(){
         border: '1px solid #252422',
       };
 
-    const rows = await GET();
+    const response = await fetch('http://localhost:3000/api/users', {method: "GET"});
+    const rows : UserData[] = await response.json();
+    console.log(rows)
     //@ts-ignore
     const data: UserData[] = rows.map((row: QueryResultRow) =>({
             id: row.id,
