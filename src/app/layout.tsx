@@ -36,6 +36,9 @@ export default async function RootLayout({
                 </Link>
                 </nav>
                 <nav className="py-2 rounded-md text-sm font-medium">
+                  {!!session && <Link className=" py-3 px-3" href="/users">Users</Link>}
+                </nav>
+                <nav className="py-2 rounded-md text-sm font-medium">
                   {!!session && <Logout />}
                   {!session && <Link className=" py-3 px-3" href="/login">Login</Link>}
                 </nav>
