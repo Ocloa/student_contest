@@ -19,7 +19,6 @@ export const authOptions: NextAuthOptions = {
         isadmin: {},
       },
       async authorize(credentials) {
-        //
         const response = await sql`
         SELECT * FROM users WHERE email=${credentials?.email}`;
         const tabledata = response.rows[0];
