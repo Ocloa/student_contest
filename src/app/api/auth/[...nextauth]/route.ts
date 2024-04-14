@@ -1,9 +1,9 @@
-import NextAuth from 'next-auth';
+import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
 import { sql } from '@vercel/postgres';
 
-const handler = NextAuth({
+export const authOptions: NextAuthOptions = {
   session: {
     strategy: 'jwt',
   },
@@ -16,25 +16,27 @@ const handler = NextAuth({
         name: {},
         email: {},
         password: {},
+        isadmin: {},
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         //
         const response = await sql`
         SELECT * FROM users WHERE email=${credentials?.email}`;
-        const user = response.rows[0];
+        const tabledata = response.rows[0];
 
         const passwordCorrect = await compare(
           credentials?.password || '',
-          user.password
+          tabledata.password
         );
 
-        console.log({ passwordCorrect });
+        console.log({ passwordCorrect, tabledata });
 
         if (passwordCorrect) {
           return {
-            id: user.id,
-            name: user.name,
-            email: user.email,
+            isadmin: tabledata.isadmin,
+            id: tabledata.id,
+            name: tabledata.name,
+            email: tabledata.email,
           };
         }
 
@@ -42,7 +44,22 @@ const handler = NextAuth({
       },
     }),
   ],
+    callbacks: {
+      async jwt({ token, user }) {
+        if (user) {
+          token.user = user;
+          token.isadmin = user.isadmin;
+        }
+        return token;
+      },
+      async session({ session, token }) {
+        if (token && token.user) {
+          session.user.isadmin = token.isadmin;
+        }
+        return session;
+      },
+  },
   secret: process.env.NEXTAUTH_SECRET,
-});
-
+};
+const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };

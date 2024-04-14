@@ -20,6 +20,9 @@ export default function Form() {
       router.push('/');
       router.refresh();
     }
+    else{
+      alert('Неправильные логин и/или пароль');
+    }
   };
   return (
     <main className="flex min-h-screen flex-col items-center justify-between ">
@@ -37,6 +40,7 @@ export default function Form() {
       <p>Password</p>
       <input
         name="password"
+        id="password"
         className="border border-black  text-black py-1 rounded-md "
         type="password"
       />

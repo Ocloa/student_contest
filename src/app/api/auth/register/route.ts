@@ -11,8 +11,8 @@ export async function POST(request: Request) {
     const hashedPassword = await hash(password, 10);
 
     const response = await sql`
-      INSERT INTO users (email, name, surname, studentgroup, password)
-      VALUES (${email}, ${name}, ${surname}, ${studentgroup}, ${hashedPassword})
+      INSERT INTO users (email, name, surname, studentgroup, password, isadmin)
+      VALUES (${email}, ${name}, ${surname}, ${studentgroup}, ${hashedPassword}, FALSE)
     `;
   } catch (e) {
     console.log({ e });
