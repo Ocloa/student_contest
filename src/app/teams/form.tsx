@@ -58,6 +58,7 @@ import TeamsPage from './Teams';
 const Form = () => {
     return(
         <div className="min-h-screen text-black">
+          {/*@ts-ignore*/ }
          <TeamsPage></TeamsPage>
         </div>
     )
