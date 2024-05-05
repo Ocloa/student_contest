@@ -5,8 +5,8 @@ const prisma = new PrismaClient()
 
 
   export async function GET(request: NextRequest) {
+    const searchParams  = request.nextUrl.searchParams
     try {
-        const searchParams  = request.nextUrl.searchParams
         const teamId = Number(searchParams.get("teamid")); 
         const teamMembers = await prisma.users.findMany({
             where: {teamid: teamId},
