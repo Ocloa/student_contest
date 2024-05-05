@@ -1,4 +1,6 @@
+'use client'
 import React from 'react';
+import TeamsPage from './Teams';
 
 /*const TeamTable = ({ teams }) => {
     return (
@@ -55,7 +57,9 @@ import React from 'react';
 */
 const Form = () => {
     return(
-        <div className="min-h-screen text-black">*Страница для формирования команд*</div>
+        <div className="min-h-screen text-black">
+         <TeamsPage></TeamsPage>
+        </div>
     )
 }
 

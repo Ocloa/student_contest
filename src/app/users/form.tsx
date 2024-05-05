@@ -22,9 +22,9 @@ export default async function Form(){
         border: '1px solid #252422',
       };
       //for local deployment
-   //const response = await fetch('http://localhost:3000/api/users', {method: "GET", cache: 'no-store'});
+   const response = await fetch('http://localhost:3000/api/users', {method: "GET", cache: 'no-store'});
     // for vercel deployment
-  const response = await fetch('https://student-contest.vercel.app/api/users', {method: "GET"});
+  //const response = await fetch('https://student-contest.vercel.app/api/users', {method: "GET"});
 
     const rows : UserData[] = await response.json();
     console.log(rows)

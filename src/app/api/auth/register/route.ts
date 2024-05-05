@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { hash } from 'bcrypt';
 import { sql } from '@vercel/postgres';
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export async function POST(request: Request) {
   try {
@@ -10,10 +13,20 @@ export async function POST(request: Request) {
 
     const hashedPassword = await hash(password, 10);
 
-    const response = await sql`
+    const response = await prisma.users.create({
+      data:{
+        email: `${email}`,
+        name: `${name}`,
+        surname: `${surname}`,
+        studentgroup: `${studentgroup}`,
+        password: `${hashedPassword}`,
+        isadmin: false
+      }
+
+    }) /* sql`
       INSERT INTO users (email, name, surname, studentgroup, password, isadmin)
       VALUES (${email}, ${name}, ${surname}, ${studentgroup}, ${hashedPassword}, FALSE)
-    `;
+    `; */
   } catch (e) {
     console.log({ e });
   }

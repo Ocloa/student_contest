@@ -1,7 +1,10 @@
 import NextAuth, { type NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
-import { sql } from '@vercel/postgres';
+//import { sql } from '@vercel/postgres';
+import { PrismaClient } from '@prisma/client'
+
+const prisma = new PrismaClient()
 
 export const authOptions: NextAuthOptions = {
   session: {
@@ -13,16 +16,21 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
-        name: {},
-        email: {},
-        password: {},
-        isadmin: {},
+        name: {type: 'text',},
+        email: {type: 'text',},
+        password: {type: 'text',},
+        isadmin: {type: 'boolean',},
       },
+//@ts-ignore
       async authorize(credentials) {
-        const response = await sql`
-        SELECT * FROM users WHERE email=${credentials?.email}`;
-        const tabledata = response.rows[0];
-
+        const response = await prisma.users.findUnique({
+          where: {
+            email: credentials?.email
+          }
+        })/* sql`
+        SELECT * FROM users WHERE email=${credentials?.email}`; */
+        const tabledata = response;
+        if (tabledata){
         const passwordCorrect = await compare(
           credentials?.password || '',
           tabledata.password
@@ -38,6 +46,7 @@ export const authOptions: NextAuthOptions = {
             email: tabledata.email,
           };
         }
+      }
 
         return null;
       },

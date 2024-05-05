@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model teams {
+  id       Int     @id @default(autoincrement())
+  teamname String
+  users    users[]
+}
+
+model users {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique(map: "unique_email")
+  name         String
+  surname      String
+  studentgroup String
+  password     String
+  isadmin      Boolean?
+  roleid       Int?
+  teamid       Int?
+  roles        roles?   @relation(fields: [roleid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  teams        teams?   @relation(fields: [teamid], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model roles {
+  id       Int     @id @default(autoincrement())
+  rolename String
+  users    users[]
+}
