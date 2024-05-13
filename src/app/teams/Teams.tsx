@@ -1,5 +1,3 @@
-
-import { useState } from 'react';
 import Dropdown from '../components/Dropdown';
 
 
@@ -15,8 +13,15 @@ type TeamsData = {
   [teamName: string]: TeamMember[];
 };
 
+const formStyle = {
+  backgroundColor: 'rgba(37,36,34,0.9)',
+  color: '#FFFFFF',
+  selection: '#EB5E28',
+  padding: '8px',
+  border: '1px solid #252422',
+  borderRadius: '10px',
 
-
+}
 
 
 // Компонент страницы
@@ -32,26 +37,20 @@ const TeamsPage: React.FC<{ teamsData: TeamsData }> = () => {
     });
     console.log(request);
     }
+
     return (
-      <div>
+      <div className='flex flex-col ms-8'>
+        <div className='flex flex-col'>
         <h1>Таблица команд</h1>
-        <div>
             <Dropdown/>
         </div>
-        <h2></h2>
-        <table>
-      <thead>
-      </thead>
-      <tbody>
-          <tr>
-          </tr>
-      </tbody>
-    </table>
-    <form onSubmit={handleSubmit}>
-      <p>Формирование команд</p>
-      <input placeholder='Введите название команды' id="teamname" className="border border-black text-black py-1 rounded-md mt-6"></input>
-      <button style={{backgroundColor: "#eb5e28"}} className="text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md mt-6" type="submit">Создать команду</button>
-    </form>
+        <div className='flex-nowrap mt-24'>
+        <form style={formStyle} className='flex flex-col max-w-64 h-48 bg-black self-center' onSubmit={handleSubmit}>
+          <p>Формирование команд</p>
+          <input placeholder='Введите название команды' id="teamname" className="border border-black text-black py-1 my-4 rounded-md"></input>
+          <button style={{backgroundColor: "#eb5e28"}} className="text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md" type="submit">Создать команду</button>
+        </form>
+        </div>
       </div>
 
             

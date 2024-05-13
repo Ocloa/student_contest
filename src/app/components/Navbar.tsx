@@ -9,11 +9,11 @@ export default async function Navbar() {
         const session:any = await getServerSession(authOptions);
         console.log(session);
 return(
-    <div>
-        <nav style={{backgroundColor: '#403D39'}}>
-          <div className="max-w-7xl mx-auto px-4">
+    <div className='max-w-auto'>
+        <nav className='max-w-auto' style={{backgroundColor: '#403D39'}}>
+          <div className="max-w-7xl mx-auto px-auto">
             <div className="flex items-center justify-between h-16">
-              <div className="flex-shrink-0">
+              <div className="flex-shrink">
                 <span className="text-white font-bold text-xl"> <Link href='/'>Student Contest App</Link> </span>
               </div>
               <div className="flex">

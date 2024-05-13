@@ -17,6 +17,15 @@ interface Team {
     padding: '8px',
     border: '1px solid #252422',
   };
+  const selectStyle = {
+    backgroundColor: '#403D39',
+    color: '#FFFFFF',
+    selection: '#EB5E28',
+    padding: '8px',
+    border: '1px solid #252422',
+    borderRadius: '5px',
+
+  }
   const Dropdown: React.FC = () => {
     const [teams, setTeams] = useState<Team[]>([]);
     const [teamMembers, setTeamMembers] = useState('');
@@ -25,7 +34,7 @@ interface Team {
     useEffect(() => {
       const fetchTeams = async () => {
         try {
-          const response =await fetch(`/api/getTeams`, {
+          const response = await fetch(`/api/getTeams`, {
             method: 'GET', });
         const teamsData = await response.json();
           setTeams(teamsData);
@@ -48,7 +57,7 @@ interface Team {
     };
     return (
       <div>
-        <select value={selectedTeam} onChange={handleTeamChange}>
+        <select style={selectStyle} value={selectedTeam} onChange={handleTeamChange}>
         <option value="">Выберите команду</option>
           {teams.map((team) => (
             <option  key={team.id} value={team.id}>

@@ -1,4 +1,5 @@
 import React from 'react';
+import {checkEnvironment} from '../util/checkEnvironment';
 
 type UserData = {
     id: number;
@@ -22,7 +23,7 @@ export default async function Form(){
         border: '1px solid #252422',
       };
       //for local deployment
-   const response = await fetch('http://localhost:3000/api/users', {method: "GET", cache: 'no-store'});
+      const response = await fetch(checkEnvironment().concat("/api/users"), {method: "GET", cache: 'no-store'});
     // for vercel deployment
   //const response = await fetch('https://student-contest.vercel.app/api/users', {method: "GET"});
 
