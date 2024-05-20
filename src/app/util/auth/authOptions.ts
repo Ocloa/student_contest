@@ -16,6 +16,7 @@ export const authOptions: NextAuthOptions = {
   providers: [
     CredentialsProvider({
       credentials: {
+        id: {type: 'text',},
         name: {type: 'text',},
         email: {type: 'text',},
         password: {type: 'text',},
@@ -57,12 +58,14 @@ export const authOptions: NextAuthOptions = {
         if (user) {
           token.user = user;
           token.isadmin = user.isadmin;
+          token.id = user.id;
         }
         return token;
       },
       async session({ session, token }) {
         if (token && token.user) {
           session.user.isadmin = token.isadmin;
+          session.user.id = token.id;
         }
         return session;
       },

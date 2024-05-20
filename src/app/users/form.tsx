@@ -22,11 +22,8 @@ export default async function Form(){
         padding: '8px',
         border: '1px solid #252422',
       };
-      //for local deployment
-      const response = await fetch(checkEnvironment().concat("/api/users"), {method: "GET", cache: 'no-store'});
-    // for vercel deployment
-  //const response = await fetch('https://student-contest.vercel.app/api/users', {method: "GET"});
 
+    const response = await fetch(checkEnvironment().concat("/api/users"), {method: "GET", cache: 'no-store'});
     const rows : UserData[] = await response.json();
     console.log(rows)
     //@ts-ignore
@@ -41,8 +38,8 @@ export default async function Form(){
         <main className="min-h-screen">
         <div>
           <h1>Users</h1>
-          <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-            <thead>
+          <table style={{ width: '85%', marginLeft: 'auto', marginRight:'auto', borderCollapse: 'collapse' }}>
+            <thead className="border px-4 py-2 text-left font-bold [&[align=center]]:text-center [&[align=right]]:text-right">
                 <tr>
                 <th style={headerStyle}>ID</th>
                 <th style={headerStyle}>Имя</th>
@@ -52,7 +49,7 @@ export default async function Form(){
             </thead>
             <tbody>
                 {data.map(item => (
-                <tr key={item.id}>
+                <tr className='m-0 border-t p-0 even:bg-muted' key={item.id}>
                     <td style={dataStyle}>{item.id}</td>
                     <td style={dataStyle}>{item.name}</td>
                     <td style={dataStyle}>{item.surname}</td>

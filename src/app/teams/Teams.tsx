@@ -39,16 +39,16 @@ const TeamsPage: React.FC<{ teamsData: TeamsData }> = () => {
     }
 
     return (
-      <div className='flex flex-col ms-8'>
+      <div className='flex flex-col ms-8 '>
         <div className='flex flex-col'>
         <h1>Таблица команд</h1>
             <Dropdown/>
         </div>
         <div className='flex-nowrap mt-24'>
-        <form style={formStyle} className='flex flex-col max-w-64 h-48 bg-black self-center' onSubmit={handleSubmit}>
+        <form style={formStyle} className='shadow-lg flex flex-col max-w-64 h-48 bg-black self-center' onSubmit={handleSubmit}>
           <p>Формирование команд</p>
           <input placeholder='Введите название команды' id="teamname" className="border border-black text-black py-1 my-4 rounded-md"></input>
-          <button style={{backgroundColor: "#eb5e28"}} className="text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md" type="submit">Создать команду</button>
+          <button className="bg-orange text-light p-2 rounded hover:bg-orange-dark focus:outline-none focus:ring-2 focus:ring-orange focus:ring-opacity-50" type="submit">Создать команду</button>
         </form>
         </div>
       </div>

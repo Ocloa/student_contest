@@ -19,7 +19,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <Navbar></Navbar>
-      <div className="py-8">
+      <div className="pt-8">
         <main>{children}</main>
       </div>
       </body>

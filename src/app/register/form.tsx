@@ -91,7 +91,7 @@ export default function Form() {
         className="border border-black text-black py-1 rounded-md mt-6"
         type="password"
       />
-      <button style={{backgroundColor: "#eb5e28"}} className="text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md mt-6" type="submit">Register</button>
+      <button style={{backgroundColor: "#eb5e28"}} className="text-gray-200 bg-gray-800 hover:bg-gray-700 hover:text-white px-3 py-2 rounded-md mt-6" type="submit">Зарегистрироваться</button>
     </form>
     </main>
   );
